@@ -1,19 +1,29 @@
 import React, { use, useState } from "react";
 import Bottle from "../bottle/Bottle";
+import { addIdtoStoredCart } from "../../utilitis/localstories";
 
 const Bottles = ({ bottlesPromes }) => {
   const bottles = use(bottlesPromes);
   const [card, setCard] = useState([]);
 
   const handelAddToCard = (bottle) => {
-    console.log("Add To My Single Card", bottle);
+    // console.log("Add To My Single Card", bottle);
+    const newCard = [...card , bottle]
+    setCard(newCard)
+
+    //bottle id inthe storage
+    addIdtoStoredCart(bottle.id)
+    
+
   };
 
   return (
     <div>
-      <h1 className=" text-2xl text-center mb-10">
-        Bottles : {bottles.length}
-      </h1>
+      <h1 className=" text-2xl text-center mb-10">Bottles : {bottles.length}</h1>
+
+      <p className=" text-2xl text-center mb-10">Add to card: {card.length}</p>
+        
+      
       <div className="grid grid-cols-1 ml-10 mr-10 sm:grid-cols-2 lg:grid-cols-3 gap-20">
 
         {bottles.map((bottle) => (
